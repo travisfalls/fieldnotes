@@ -19,7 +19,7 @@ graders:
   - name: body-preserved
     type: regex
     target: { source: file, path: Fieldnotes/entries/2026-07-17.md }
-    pattern: "The iPad simulator kept hiding a timing issue that only showed up on real devices\\. Test on hardware sooner\\."
+    pattern: "The staging environment kept hiding a timing issue that only showed up in production\\. Test with production-like data sooner\\."
   - name: impact-extracted
     type: regex
     target: { source: file, path: Fieldnotes/entries/2026-07-17.md }
@@ -31,11 +31,11 @@ graders:
   - name: prep-moved-to-reports
     type: regex
     target: { source: file, path: Fieldnotes/reports/2026-08-04_1on1-prep.md }
-    pattern: "Background queue design approved"
+    pattern: "Reminders design approved"
   - name: original-kept-in-migrated
     type: regex
     target: { source: file, path: "Weekly Check-ins/migrated/2026-07-17_weekly-checkin.md" }
-    pattern: "Shipped the offline sync retry fix"
+    pattern: "Shipped the double-booking fix"
   - name: footer-preserved
     type: regex
     target: { source: file, path: Fieldnotes/entries/2026-07-17.md }

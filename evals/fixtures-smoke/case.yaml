@@ -13,4 +13,4 @@ graders:
   - name: name-read
     type: regex
     target: last_message
-    pattern: "Jordan"
+    pattern: "Clark"

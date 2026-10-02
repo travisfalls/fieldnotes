@@ -4,7 +4,7 @@
 
 ```yaml
 schema: 1
-name: Jordan
+name: Alex
 reminder:
   enabled: true
   day: friday            # monday..sunday

@@ -1,18 +1,18 @@
 # Week of July 20–24, 2026
 
 ## Accomplishments
-- Built the sync status indicator so reps can see pending uploads.
-- Wrote the design note for moving sync to a background queue.
+- Built the waitlist status indicator so guests can see their place in line.
+- Wrote the design note for moving reminder messages to a scheduled job.
 
 ## Challenges & Learnings
-- Estimating the background queue work was hard because the legacy code paths are tangled.
+- Estimating the reminders work was hard because the legacy code paths are tangled.
 
 ## Engagement Check-in
 **Level:** 6/10
 Steady but slow.
 
 ## Looking Ahead
-- Get feedback on the background queue design note.
+- Get feedback on the reminders design note.
 
 ---
 *Logged: July 24, 2026, 3:10 PM*

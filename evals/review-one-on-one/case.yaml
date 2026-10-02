@@ -17,5 +17,5 @@ graders:
     focus: last_message
     criteria: |
       PASS if the 1:1 notes (in the reply or summarized from the saved file) are short and skimmable, roughly under 200 words
-      in bullets, and mention the event-driven redesign or staging results and Priya.
+      in bullets, and mention the event-driven redesign or staging results and Jimmy.
       FAIL if they read like a long essay or cover months of history.

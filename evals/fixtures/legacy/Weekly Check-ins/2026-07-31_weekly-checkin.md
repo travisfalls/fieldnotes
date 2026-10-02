@@ -1,7 +1,7 @@
 # Week of July 27–31, 2026
 
 ## Accomplishments
-- The client lead approved the background queue design and thanked me for how clearly I explained the trade-offs.
+- The client lead approved the reminders design and thanked me for how clearly I explained the trade-offs.
 - Mentored a new developer through their first pull request.
 
 ## Challenges & Learnings
@@ -12,7 +12,7 @@
 Design approval and mentoring made this a great week.
 
 ## Looking Ahead
-- Start implementing the background queue.
+- Start implementing the reminders.
 
 ---
 *Logged: July 31, 2026, 1:45 PM*

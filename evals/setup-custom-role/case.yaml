@@ -1,0 +1,32 @@
+schema_version: "1.1"
+name: setup-custom-role
+tags: [setup]
+plugins: ["../.."]
+execution:
+  prompt: >-
+    Set up Fieldnotes for me in ./Fieldnotes. I'm a high school chemistry teacher and I also coach the robotics team.
+    None of the standard role packs fit, so draft categories for my job and use them as-is.
+    No reminder. Don't ask follow-up questions.
+  max_turns: 25
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
+graders:
+  - name: custom-recorded
+    type: regex
+    target: { source: file, path: Fieldnotes/fieldnotes.yml }
+    pattern: "role_packs:\\s*\\[custom\\]"
+  - name: no-software-categories
+    type: regex
+    target: { source: file, path: Fieldnotes/fieldnotes.yml }
+    pattern: "name: (Backend|Frontend|DevOps)"
+    match: not_contains
+  - name: categories-fit-teaching
+    type: llm
+    focus: { source: file, path: Fieldnotes/fieldnotes.yml }
+    criteria: |
+      PASS if the categories list has 8 to 12 entries that fit a high school chemistry teacher who coaches robotics
+      (for example instruction, lab safety, curriculum, student support, coaching) and includes leadership/mentoring and learning/growth.
+      FAIL if categories are generic software or business categories, or there are fewer than 8 or more than 12.
+  - name: no-reminder-file
+    type: file_exists
+    path: "Fieldnotes/fieldnotes-reminder.ics"
+    exists: false

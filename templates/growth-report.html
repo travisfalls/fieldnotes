@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnotes Growth</title>
+<style>
+  :root { --bg:#fbfaf7; --fg:#1f2328; --muted:#6b6f76; --line:#e3e1db; --accent:#2f6f5e; --warn:#b4542d; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16181b; --fg:#e8e6e3; --muted:#9a9ea6; --line:#2c2f34; --accent:#6fbfa6; --warn:#e08a63; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 28px; }
+  h2 { font-size: 17px; margin: 32px 0 8px; }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin: 12px 0; }
+  .row { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .tag { font-size: 12px; padding: 2px 8px; border-radius: 999px; border:1px solid var(--line); color: var(--muted); }
+  .tag.grew { color: var(--accent); border-color: var(--accent); }
+  .tag.faded { color: var(--warn); border-color: var(--warn); }
+  svg { width: 100%; height: auto; display:block; }
+  .bar { fill: var(--accent); }
+  .axis { fill: var(--muted); font-size: 10px; }
+  .line { fill:none; stroke: var(--accent); stroke-width: 2; }
+  .dot { fill: var(--accent); }
+  ul { margin: 8px 0 0; padding-left: 18px; }
+  li { margin: 2px 0; }
+  a { color: var(--accent); }
+  .week { font-variant-numeric: tabular-nums; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title"></h1>
+  <p class="sub" id="sub"></p>
+  <h2>Engagement</h2>
+  <div class="card"><svg id="engagement" viewBox="0 0 800 160" role="img" aria-label="Engagement over time"></svg></div>
+  <h2>Skill areas</h2>
+  <div id="categories"></div>
+</main>
+<script>
+const DATA = /*FIELDNOTES_DATA*/{};
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent, text) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (text !== undefined) n.textContent = text;
+  parent.appendChild(n);
+  return n;
+}
+function engagementChart(svg, points) {
+  if (!points || !points.length) return;
+  const w = 800, h = 160, pad = 24;
+  const x = i => pad + (points.length === 1 ? (w - 2 * pad) / 2 : i * (w - 2 * pad) / (points.length - 1));
+  const y = s => h - pad - (s - 1) * (h - 2 * pad) / 9;
+  el("polyline", { class: "line", points: points.map((p, i) => x(i) + "," + y(p.score)).join(" ") }, svg);
+  points.forEach((p, i) => {
+    const c = el("circle", { class: "dot", cx: x(i), cy: y(p.score), r: 3 }, svg);
+    el("title", {}, c, p.week + ": " + p.score + "/10");
+  });
+  [1, 5, 10].forEach(s => el("text", { class: "axis", x: 2, y: y(s) + 3 }, svg, s));
+  el("text", { class: "axis", x: pad, y: h - 4 }, svg, points[0].week);
+  el("text", { class: "axis", x: w - pad, y: h - 4, "text-anchor": "end" }, svg, points[points.length - 1].week);
+}
+function categoryCard(root, cat, buckets) {
+  const card = document.createElement("div");
+  card.className = "card";
+  const row = document.createElement("div");
+  row.className = "row";
+  const name = document.createElement("strong");
+  name.textContent = cat.name;
+  const tag = document.createElement("span");
+  tag.className = "tag " + (cat.trend || "");
+  tag.textContent = cat.trend || "";
+  row.append(name, tag);
+  card.appendChild(row);
+  const w = 800, h = 90, pad = 18;
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+  const max = Math.max(1, ...cat.values);
+  const bw = (w - 2 * pad) / buckets.length;
+  cat.values.forEach((v, i) => {
+    const bh = v / max * (h - 2 * pad);
+    const r = el("rect", { class: "bar", x: pad + i * bw + 2, y: h - pad - bh, width: Math.max(1, bw - 4), height: bh, rx: 2 }, svg);
+    el("title", {}, r, buckets[i] + ": " + v);
+    el("text", { class: "axis", x: pad + i * bw + bw / 2, y: h - 4, "text-anchor": "middle" }, svg, buckets[i]);
+  });
+  card.appendChild(svg);
+  if (cat.evidence && cat.evidence.length) {
+    const ul = document.createElement("ul");
+    cat.evidence.forEach(ev => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "../entries/" + ev.week + ".md";
+      a.className = "week";
+      a.textContent = ev.week;
+      li.append(a, document.createTextNode(" " + ev.quote));
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+  }
+  root.appendChild(card);
+}
+document.getElementById("title").textContent = DATA.title || "Fieldnotes Growth";
+document.getElementById("sub").textContent = DATA.name ? "Prepared for " + DATA.name : "";
+engagementChart(document.getElementById("engagement"), DATA.engagement || []);
+const root = document.getElementById("categories");
+(DATA.categories || []).forEach(c => categoryCard(root, c, DATA.buckets || []));
+</script>
+</body>
+</html>

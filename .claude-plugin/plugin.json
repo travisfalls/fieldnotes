@@ -1,0 +1,10 @@
+{
+  "name": "fieldnotes",
+  "displayName": "Fieldnotes",
+  "version": "0.2.0",
+  "description": "A private weekly work journal in your own files. Log your week, then turn it into 1:1 notes, review prep, resume bullets, skill trends, and a reminder of what you've accomplished.",
+  "author": { "name": "Travis Falls" },
+  "repository": "https://github.com/travisfalls/fieldnotes",
+  "license": "MIT",
+  "keywords": ["journal", "career", "weekly-checkin", "performance-review", "resume"]
+}

@@ -1,0 +1,42 @@
+schema_version: "1.1"
+name: resume-bullets
+tags: [resume]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Today is September 25, 2026. Give me resume bullets from my fieldnotes for this year."
+  max_turns: 25
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?resume"'
+  - name: deploy-impact
+    type: regex
+    target: { source: file, path: reports/2026-09-25-resume.md }
+    pattern: "98%"
+  - name: latency-impact
+    type: regex
+    target: { source: file, path: reports/2026-09-25-resume.md }
+    pattern: "300 ?ms"
+  - name: source-weeks-cited
+    type: regex
+    target: { source: file, path: reports/2026-09-25-resume.md }
+    pattern: "2026-05-22"
+  - name: no-invented-metrics
+    type: llm
+    focus: { source: file, path: reports/2026-09-25-resume.md }
+    criteria: |
+      Ignore dates, week citations, and the number of bullets. Look only at percentages, durations, sizes, and counts
+      stated in the bullets. Allowed values: 70%, 98%, 1.8s, 300ms, 40 reports, about 5 minutes, 10 seconds,
+      2x peak traffic, two releases.
+      PASS if every such figure is in the allowed list.
+      FAIL only if a bullet states a percentage, duration, size, or count that is not in the allowed list.
+  - name: action-verbs
+    type: llm
+    focus: { source: file, path: reports/2026-09-25-resume.md }
+    criteria: |
+      PASS if each resume bullet starts with a past-tense action verb (for example "Led", "Built", "Diagnosed").
+      FAIL if bullets start with "I", "Responsible for", or a noun.

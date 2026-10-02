@@ -1,0 +1,40 @@
+schema_version: "1.1"
+name: review-quarterly
+tags: [review]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Today is September 25, 2026. Help me prep for my Q3 review using my fieldnotes."
+  max_turns: 30
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?review"'
+  - name: report-mentions-redesign
+    type: regex
+    target: { source: file, path: reports/2026-Q3-review.md }
+    pattern: "event-driven"
+    flags: i
+  - name: includes-migration-recovery
+    type: regex
+    target: { source: file, path: reports/2026-Q3-review.md }
+    pattern: "40 reports"
+  - name: cites-weeks
+    type: regex
+    target: { source: file, path: reports/2026-Q3-review.md }
+    pattern: "2026-0[789]-\\d{2}"
+  - name: no-missing-week-cited-as-entry
+    type: regex
+    target: { source: file, path: reports/2026-Q3-review.md }
+    pattern: "\\(2026-09-04\\)"
+    match: not_contains
+  - name: honest-about-challenges
+    type: llm
+    focus: { source: file, path: reports/2026-Q3-review.md }
+    criteria: |
+      PASS if the review includes wins with impact (reporting migration, event-driven redesign) AND honestly covers
+      the missed reporting migration deadline in July as a challenge with what was learned.
+      FAIL if the July missed deadline is omitted or the review only contains wins.

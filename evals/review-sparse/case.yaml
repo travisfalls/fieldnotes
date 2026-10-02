@@ -1,0 +1,25 @@
+schema_version: "1.1"
+name: review-sparse
+tags: [review]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Today is September 25, 2026. Write my annual review prep for 2026 from my fieldnotes."
+  max_turns: 25
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?review"'
+  - name: report-file
+    type: file_exists
+    path: "reports/2026-annual-review.md"
+  - name: says-history-is-short
+    type: llm
+    focus: last_message
+    criteria: |
+      PASS if the reply plainly notes that only about 8 weeks (since late July) are logged, so the annual review prep
+      covers a limited period.
+      FAIL if it presents the output as a full-year review without noting the short history.

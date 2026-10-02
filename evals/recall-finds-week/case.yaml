@@ -1,0 +1,28 @@
+schema_version: "1.1"
+name: recall-finds-week
+tags: [recall]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "When did I deal with the flaky deploys? Check my fieldnotes."
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?recall"'
+  - name: cites-resolution-week
+    type: regex
+    target: last_message
+    pattern: "2026-05-22|May 22"
+  - name: mentions-start
+    type: regex
+    target: last_message
+    pattern: "2026-05-08|May 8"
+  - name: no-files-written
+    type: tool_used
+    tool: Write
+    min: 0
+    max: 0

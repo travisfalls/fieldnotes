@@ -1,0 +1,27 @@
+schema_version: "1.1"
+name: receipts-specific-doubt
+tags: [receipts]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Today is September 25, 2026. I need my fieldnotes receipts. I feel like I'm faking it as an architect and everyone's going to figure it out."
+  max_turns: 25
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?receipts"'
+  - name: cites-architecture-weeks
+    type: regex
+    target: last_message
+    pattern: "2026-0[4-9]-\\d{2}|(April|May|June|July|August|September) \\d{1,2}"
+  - name: evidence-based-tone
+    type: llm
+    focus: last_message
+    criteria: |
+      PASS if the reply responds to the architecture doubt with specific evidence from the journal (for example the first
+      ADR in April, the partitioning work, leading the event-driven redesign and its design review, the board presentation,
+      kudos about the redesign) tied to weeks, in a warm but factual tone without hype or therapy-speak.
+      FAIL if it is generic encouragement, invents accomplishments, or doesn't cite weeks.

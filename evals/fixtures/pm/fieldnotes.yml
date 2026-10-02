@@ -1,0 +1,22 @@
+schema: 1
+name: Sam
+reminder:
+  enabled: false
+  day: friday
+  time: "14:00"
+role_packs: [custom]
+categories:
+  - name: Discovery
+    description: Customer interviews, problem framing, validating ideas
+  - name: Roadmapping
+    description: Planning what comes next and why
+  - name: Stakeholder Alignment
+    description: Getting leadership, sales, and support on the same page
+  - name: Launch
+    description: Specs, coordinating with engineering and design, shipping
+  - name: Product Analytics
+    description: Defining metrics, measuring outcomes, experiments
+  - name: Leadership & Mentoring
+    description: Leading initiatives, mentoring, influencing without authority
+  - name: Learning & Growth
+    description: New domains, methods, and skills picked up

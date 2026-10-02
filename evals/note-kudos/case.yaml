@@ -1,0 +1,20 @@
+schema_version: "1.1"
+name: note-kudos
+tags: [note]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "It's Wednesday, September 23, 2026. Quick note for my fieldnotes: the client PM thanked me in standup for unblocking QA."
+  max_turns: 10
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?note"'
+  - name: kudos-marked
+    type: regex
+    target: { source: file, path: notes/2026-09-25.md }
+    pattern: "- 2026-09-23( \\d{2}:\\d{2})? \\(kudos\\) .*(thank|unblock)"
+    flags: i

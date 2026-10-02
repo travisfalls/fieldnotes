@@ -1,0 +1,58 @@
+schema_version: "1.1"
+name: checkin-full
+tags: [checkin]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: >-
+    Today is Friday, September 25, 2026. Let's do my weekly check-in, but I'm short on time so here's everything at once
+    and please don't ask follow-ups. Accomplishments: the architecture board approved the event-driven design with minor changes,
+    and I finished the load test. Challenges: the board's change requests mean redoing part of the schema versioning, and I
+    underestimated how long the slides would take. Engagement: 6 out of 10, proud of the approval but tired. Looking ahead:
+    apply the board's changes and start production rollout planning. Nobody else thanked me this week beyond what's in my notes.
+    Accept whatever tags and highlights you propose and save it.
+  max_turns: 30
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+graders:
+  - name: skill-fired
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?checkin"'
+  - name: week-ending
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "week_ending: 2026-09-25"
+  - name: engagement
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "engagement: 6\\b"
+  - name: continues-last-week
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "continues: \\[[^\\]]*2026-09-18"
+  - name: used-notes
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "query timeout|status dashboard"
+    flags: i
+  - name: valid-tag-category
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "category: \"?Architecture\"?"
+  - name: has-highlight
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "type: (win|resume)"
+  - name: four-sections
+    type: regex
+    target: { source: file, path: entries/2026-09-25.md }
+    pattern: "## Accomplishments[\\s\\S]*## Challenges & Learnings[\\s\\S]*## Engagement Check-in[\\s\\S]*## Looking Ahead"
+  - name: first-person
+    type: llm
+    focus: { source: file, path: entries/2026-09-25.md }
+    criteria: |
+      PASS if the entry body is written from the user's own point of view: first person ("I ...", "my ..."), or short
+      first-person bullets that leave out the subject ("Presented the design to the board"). It must reflect the
+      architecture board approval, the load test, the schema rework challenge, and engagement of 6/10.
+      FAIL only if it refers to the user in the third person (a name, "he", "she", "they") or is missing any of those four points.

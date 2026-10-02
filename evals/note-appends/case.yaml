@@ -1,0 +1,24 @@
+schema_version: "1.1"
+name: note-appends
+tags: [note]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Today is Thursday, September 24, 2026. /fieldnotes:note finished the load test, pipeline held at 3x peak"
+  max_turns: 10
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, AskUserQuestion]
+graders:
+  - name: new-note-added
+    type: regex
+    target: { source: file, path: notes/2026-09-25.md }
+    pattern: "- 2026-09-24( \\d{2}:\\d{2})? .*3x peak"
+  - name: old-notes-kept
+    type: regex
+    target: { source: file, path: notes/2026-09-25.md }
+    pattern: "query timeout in the status dashboard[\\s\\S]*architecture board"
+  - name: no-questions
+    type: tool_used
+    tool: AskUserQuestion
+    min: 0
+    max: 0

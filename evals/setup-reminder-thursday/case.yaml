@@ -1,0 +1,28 @@
+schema_version: "1.1"
+name: setup-reminder-thursday
+tags: [setup]
+plugins: ["../.."]
+execution:
+  prompt: >-
+    Set up Fieldnotes in ./Fieldnotes. I'm a product manager, use that pack as-is.
+    I want my reminder on Thursdays at 3pm as a calendar file. Don't ask me anything else.
+  max_turns: 25
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
+graders:
+  - name: ics-thursday
+    type: regex
+    target: { source: file, path: Fieldnotes/fieldnotes-reminder.ics }
+    pattern: "BYDAY=TH"
+  - name: ics-3pm
+    type: regex
+    target: { source: file, path: Fieldnotes/fieldnotes-reminder.ics }
+    pattern: "DTSTART:\\d{8}T150000"
+  - name: no-placeholders-left
+    type: regex
+    target: { source: file, path: Fieldnotes/fieldnotes-reminder.ics }
+    pattern: "\\{\\{"
+    match: not_contains
+  - name: config-thursday
+    type: regex
+    target: { source: file, path: Fieldnotes/fieldnotes.yml }
+    pattern: "day: thursday[\\s\\S]*time: \"15:00\""

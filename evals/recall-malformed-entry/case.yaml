@@ -1,0 +1,15 @@
+schema_version: "1.1"
+name: recall-malformed-entry
+tags: [recall]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "In my fieldnotes, when did I estimate the reporting migration?"
+  max_turns: 20
+  allowed_tools: [Read, Glob, Grep, Skill]
+graders:
+  - name: finds-malformed-week
+    type: regex
+    target: last_message
+    pattern: "2026-06-26|June 26"

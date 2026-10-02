@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fieldnotes//Weekly Check-in//EN
+BEGIN:VEVENT
+UID:{{UID}}
+DTSTAMP:{{DTSTAMP}}
+DTSTART:{{DTSTART}}
+DURATION:PT15M
+RRULE:FREQ=WEEKLY;BYDAY={{BYDAY}}
+SUMMARY:Fieldnotes weekly check-in
+DESCRIPTION:Open Claude with your Fieldnotes folder and run /fieldnotes:checkin
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Time for your Fieldnotes check-in
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

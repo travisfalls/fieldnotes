@@ -1,0 +1,30 @@
+schema: 1
+name: Jordan
+reminder:
+  enabled: true
+  day: friday
+  time: "14:00"
+role_packs: [software-engineer, consultant]
+categories:
+  - name: Architecture
+    description: System design, technical direction, trade-off decisions
+  - name: Backend
+    description: APIs, services, business logic, server-side performance
+  - name: Frontend
+    description: UI implementation, client-side state, accessibility, web performance
+  - name: Data
+    description: Schemas, queries, migrations, pipelines, storage performance
+  - name: DevOps & Infrastructure
+    description: CI/CD, cloud, deployment, observability, reliability
+  - name: Testing & Quality
+    description: Automated tests, test strategy, debugging, code review
+  - name: AI & Tooling
+    description: AI-assisted development, developer tools, automation
+  - name: Leadership & Mentoring
+    description: Leading efforts, mentoring, raising the team's bar
+  - name: Learning & Growth
+    description: New skills, technologies, and domains picked up
+  - name: Client Communication
+    description: Demos, status updates, managing expectations, building trust
+  - name: Delivery & Process
+    description: Estimates, planning, keeping commitments, adapting process to the client

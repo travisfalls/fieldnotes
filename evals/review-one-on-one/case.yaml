@@ -1,0 +1,21 @@
+schema_version: "1.1"
+name: review-one-on-one
+tags: [review]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: "Today is September 25, 2026. I have a 1:1 with my manager Monday. Use my fieldnotes to make me quick 1:1 notes for the last two weeks."
+  max_turns: 25
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+graders:
+  - name: report-file
+    type: file_exists
+    path: "reports/*1on1*.md"
+  - name: short-and-skimmable
+    type: llm
+    focus: last_message
+    criteria: |
+      PASS if the 1:1 notes (in the reply or summarized from the saved file) are short and skimmable, roughly under 200 words
+      in bullets, and mention the event-driven redesign or staging results and Priya.
+      FAIL if they read like a long essay or cover months of history.

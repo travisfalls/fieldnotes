@@ -1,0 +1,12 @@
+{
+  "name": "travisfalls-plugins",
+  "description": "Fieldnotes: a private weekly work journal for Claude",
+  "owner": { "name": "Travis Falls" },
+  "plugins": [
+    {
+      "name": "fieldnotes",
+      "source": "./",
+      "description": "Weekly check-ins, quick notes, review prep, resume bullets, skill trends, and receipts for rough days."
+    }
+  ]
+}

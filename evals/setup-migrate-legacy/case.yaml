@@ -1,0 +1,42 @@
+schema_version: "1.1"
+name: setup-migrate-legacy
+tags: [setup, migration]
+plugins: ["../.."]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: >-
+    Set up Fieldnotes in ./Fieldnotes and migrate my old check-ins from "./Weekly Check-ins".
+    I'm a software engineer, use that pack as-is. No reminder. Accept every tag and highlight you propose
+    for the old entries, and yes, move the 1:1 prep file to reports. Don't ask me anything else.
+  max_turns: 40
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
+graders:
+  - name: entry-migrated
+    type: regex
+    target: { source: file, path: Fieldnotes/entries/2026-07-17.md }
+    pattern: "week_ending: 2026-07-17[\\s\\S]*engagement: 7"
+  - name: body-preserved
+    type: regex
+    target: { source: file, path: Fieldnotes/entries/2026-07-17.md }
+    pattern: "The iPad simulator kept hiding a timing issue that only showed up on real devices\\. Test on hardware sooner\\."
+  - name: impact-extracted
+    type: regex
+    target: { source: file, path: Fieldnotes/entries/2026-07-17.md }
+    pattern: "impact: \".*40"
+  - name: kudos-extracted
+    type: regex
+    target: { source: file, path: Fieldnotes/entries/2026-07-31.md }
+    pattern: "type: kudos"
+  - name: prep-moved-to-reports
+    type: regex
+    target: { source: file, path: Fieldnotes/reports/2026-08-04_1on1-prep.md }
+    pattern: "Background queue design approved"
+  - name: original-kept-in-migrated
+    type: regex
+    target: { source: file, path: "Weekly Check-ins/migrated/2026-07-17_weekly-checkin.md" }
+    pattern: "Shipped the offline sync retry fix"
+  - name: footer-preserved
+    type: regex
+    target: { source: file, path: Fieldnotes/entries/2026-07-17.md }
+    pattern: "\\*Logged: July 17, 2026, 2:05 PM\\*"

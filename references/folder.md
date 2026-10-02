@@ -6,7 +6,7 @@ Resolve the user's Fieldnotes folder in this order and stop at the first match:
 
 1. **Working folder.** If `fieldnotes.yml` exists in the current working directory, or in a folder the user attached to this task, use that folder.
 2. **Pointer file.** Read `~/.config/fieldnotes/config.json`. It looks like `{"folder": "/absolute/path/to/Fieldnotes"}`. If that folder contains `fieldnotes.yml`, use it.
-3. **Not found.** Tell the user Fieldnotes isn't set up here and offer to run `/fieldnotes:setup`. Don't guess a location, and don't create files.
+3. **Not found.** Tell the user Fieldnotes isn't set up here and offer to run `/fieldnotes-setup`. Don't guess a location, and don't create files.
 
 If the pointer file names a folder you can't read (common in the Claude desktop app, where a task only sees folders the user adds), tell the user the path and ask them to add that folder to this task.
 

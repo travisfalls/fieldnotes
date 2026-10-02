@@ -12,7 +12,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?review"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-review"'
   - name: report-file
     type: file_exists
     path: "reports/2026-annual-review.md"

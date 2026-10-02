@@ -19,24 +19,26 @@ Claude desktop app or Claude Code. No Python or Node needed.
 
 ## Quick start
 
-1. Run `/fieldnotes:setup`. Pick a folder, your role, and a reminder time. In the desktop app the reminder is a scheduled task that asks if you're ready to check in. If Claude can't schedule tasks, you get a calendar event to add.
-2. During the week, jot things down: `/fieldnotes:note shipped the migration, QA unblocked`
-3. On Friday, run `/fieldnotes:checkin`.
+1. Run `/fieldnotes-setup`. Pick a folder, your role, and a reminder time. In the desktop app the reminder is a scheduled task that asks if you're ready to check in. If Claude can't schedule tasks, you get a calendar event to add.
+2. During the week, jot things down: `/fieldnotes-note shipped the migration, QA unblocked`
+3. On Friday, run `/fieldnotes-checkin`.
 
 In the desktop app, create a folder for your notes first (or pick one), and add it to the task before running a command. Setup will use that folder.
 
 ## Commands
 
+Type `/fieldnotes` in the message box to see them all. In Claude Code the full form includes the plugin name, for example `/fieldnotes:fieldnotes-checkin`.
+
 | Command | What it does |
 |---|---|
-| `/fieldnotes:setup` | Create or change your folder, role, categories, and reminder. Can import check-ins from the original weekly-checkin skill. |
-| `/fieldnotes:note` | Save a quick note for the current week. |
-| `/fieldnotes:checkin` | Weekly guided check-in. Saves an entry with highlights and skill tags. |
-| `/fieldnotes:recall` | "When did I...?" Searches your history. |
-| `/fieldnotes:review` | 1:1, quarterly, annual, or custom review prep. |
-| `/fieldnotes:resume` | Resume bullets with impact and source weeks. |
-| `/fieldnotes:growth` | Skill trends over time, with an optional chart. |
-| `/fieldnotes:receipts` | Evidence of your good work, for rough days. |
+| `/fieldnotes-setup` | Create or change your folder, role, categories, and reminder. Can import check-ins from the original weekly-checkin skill. |
+| `/fieldnotes-note` | Save a quick note for the current week. |
+| `/fieldnotes-checkin` | Weekly guided check-in. Saves an entry with highlights and skill tags. |
+| `/fieldnotes-recall` | "When did I...?" Searches your history. |
+| `/fieldnotes-review` | 1:1, quarterly, annual, or custom review prep. |
+| `/fieldnotes-resume` | Resume bullets with impact and source weeks. |
+| `/fieldnotes-growth` | Skill trends over time, with an optional chart. |
+| `/fieldnotes-receipts` | Evidence of your good work, for rough days. |
 
 ## Privacy
 

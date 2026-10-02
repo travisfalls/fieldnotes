@@ -3,7 +3,7 @@ name: note-not-setup
 tags: [note]
 plugins: ["../.."]
 execution:
-  prompt: "/fieldnotes:note shipped the new onboarding doc"
+  prompt: "/fieldnotes-note shipped the new onboarding doc"
   max_turns: 8
   allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
 graders:

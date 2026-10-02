@@ -8,7 +8,7 @@ DTSTART:{{DTSTART}}
 DURATION:PT15M
 RRULE:FREQ=WEEKLY;BYDAY={{BYDAY}}
 SUMMARY:Fieldnotes weekly check-in
-DESCRIPTION:Open Claude with your Fieldnotes folder and run /fieldnotes:checkin
+DESCRIPTION:Open Claude with your Fieldnotes folder and run /fieldnotes-checkin
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Time for your Fieldnotes check-in

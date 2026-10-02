@@ -1,5 +1,5 @@
 ---
-name: growth
+name: fieldnotes-growth
 description: Show how the user's skills have grown over time from their Fieldnotes work journal, covering which skill areas grew or faded, the engagement trend, and evidence from specific weeks, with an optional visual chart. Use for "skill growth", "how have I grown", "growth report", "skill trends", or "what am I getting better at".
 argument-hint: "[period]"
 ---

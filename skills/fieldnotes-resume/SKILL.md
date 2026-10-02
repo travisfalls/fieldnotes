@@ -1,5 +1,5 @@
 ---
-name: resume
+name: fieldnotes-resume
 description: Turn the user's Fieldnotes work journal into resume bullets with real impact and source weeks, optionally tailored to a target role. Use for "resume bullets", "update my resume", "LinkedIn accomplishments", or "what should go on my resume".
 argument-hint: "[period] [target role or focus]"
 ---

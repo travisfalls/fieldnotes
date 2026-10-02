@@ -1,5 +1,5 @@
 ---
-name: receipts
+name: fieldnotes-receipts
 description: Remind the user of the good, hard work they've actually done, using evidence from their Fieldnotes work journal. For imposter syndrome, self-doubt, feeling beat down, a rough day, or "show me my receipts" or "fieldnotes receipts", including when they also say it is more than work (this skill handles that with care first).
 ---
 

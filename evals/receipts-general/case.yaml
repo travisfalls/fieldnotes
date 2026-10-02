@@ -12,7 +12,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?receipts"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-receipts"'
   - name: includes-recovery-arc
     type: llm
     focus: last_message

@@ -12,11 +12,11 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?resume"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-resume"'
   - name: leads-with-architecture
     type: llm
     focus: { source: file, path: reports/2026-09-25-resume.md }
     criteria: |
       PASS if the first bullets emphasize architecture and technical leadership (event-driven redesign, partitioning,
-      design reviews, mentoring) and no bullet comes from an entry with a week ending before 2026-05-01.
-      FAIL if it leads with unrelated work or includes work from entries with a week ending before 2026-05-01.
+      design reviews, mentoring), and every week cited in the bullets is 2026-05-01 or later.
+      FAIL if it leads with unrelated work, or cites any week of 2026-04-24 or earlier.

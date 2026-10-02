@@ -12,7 +12,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?recall"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-recall"'
   - name: cites-resolution-week
     type: regex
     target: last_message

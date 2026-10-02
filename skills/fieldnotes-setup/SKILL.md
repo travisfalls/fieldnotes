@@ -1,5 +1,5 @@
 ---
-name: setup
+name: fieldnotes-setup
 description: Set up or reconfigure Fieldnotes, a private weekly work journal kept in your own files. Use when someone wants to start using Fieldnotes, start a work journal, change their Fieldnotes folder, role, categories, or check-in reminder, or migrate older weekly check-in files into Fieldnotes.
 ---
 
@@ -37,7 +37,7 @@ Resolve the folder using folder.md. If one is found, offer to change the folder 
    - Read the chosen pack files from `${CLAUDE_PLUGIN_ROOT}/references/category-packs/`, merge them, and show the final list. Let the user keep, rename, add, or remove categories.
 
 5. **Reminder.** Ask what day and time they want a weekly check-in reminder. Default: Friday 2:00pm. They can also say no reminder.
-   - **Scheduled task (preferred):** if you have a tool for creating scheduled tasks (for example `create_scheduled_task`) and the user didn't ask for a calendar file, create a weekly task at that day and time, in the user's local time zone, titled "Fieldnotes check-in reminder", with this prompt: `It's time for your weekly Fieldnotes check-in. Ask me if I want to start now. If I say yes, tell me to start a new task with my Fieldnotes folder added and run /fieldnotes:checkin there. Don't read or summarize any files.` The task must not try to read the Fieldnotes folder. Tell the user it's set and how to change it. If creating it fails, fall back to the calendar file.
+   - **Scheduled task (preferred):** if you have a tool for creating scheduled tasks (for example `create_scheduled_task`) and the user didn't ask for a calendar file, create a weekly task at that day and time, in the user's local time zone, titled "Fieldnotes check-in reminder", with this prompt: `It's time for your weekly Fieldnotes check-in. Ask me if I want to start now. If I say yes, tell me to start a new task with my Fieldnotes folder added and run /fieldnotes-checkin there. Don't read or summarize any files.` The task must not try to read the Fieldnotes folder. Tell the user it's set and how to change it. If creating it fails, fall back to the calendar file.
    - **Calendar file:** otherwise, read `${CLAUDE_PLUGIN_ROOT}/templates/reminder.ics`, fill every `{{PLACEHOLDER}}` as described below, and write it to `<folder>/fieldnotes-reminder.ics`. Tell them to open that file to add the event to their calendar. If they are changing an earlier calendar reminder, tell them to delete the old event, since the new one is added alongside it.
    - `{{UID}}`: `fieldnotes-<YYYYMMDDHHMMSS>@fieldnotes.local` using the current time.
    - `{{DTSTAMP}}`: current UTC time, `YYYYMMDDTHHMMSSZ`.
@@ -52,7 +52,7 @@ Resolve the folder using folder.md. If one is found, offer to change the folder 
 
 8. **Older check-ins.** If the user mentions older weekly check-in files, or you notice files named like `*_weekly-checkin.md` near the folder they chose, follow "Migrate older check-ins" below.
 
-9. **Wrap up.** In a few lines: where the folder is, how many categories they have, the reminder (or none), and the two commands to start with: `/fieldnotes:note` for quick notes during the week and `/fieldnotes:checkin` for the weekly check-in. In the desktop app, remind them to add their Fieldnotes folder to a task before running Fieldnotes commands, and to do that with a folder they create first if they don't have one yet.
+9. **Wrap up.** In a few lines: where the folder is, how many categories they have, the reminder (or none), and the two commands to start with: `/fieldnotes-note` for quick notes during the week and `/fieldnotes-checkin` for the weekly check-in. In the desktop app, remind them to add their Fieldnotes folder to a task before running Fieldnotes commands, and to do that with a folder they create first if they don't have one yet.
 
 ## Migrate older check-ins
 

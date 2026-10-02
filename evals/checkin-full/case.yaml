@@ -18,7 +18,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?checkin"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-checkin"'
   - name: week-ending
     type: regex
     target: { source: file, path: entries/2026-09-25.md }

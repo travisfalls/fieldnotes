@@ -13,7 +13,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?setup"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-setup"'
   - name: config-exists
     type: regex
     target: { source: file, path: Fieldnotes/fieldnotes.yml }

@@ -1,5 +1,5 @@
 ---
-name: checkin
+name: fieldnotes-checkin
 description: Run the Fieldnotes weekly work check-in, a short guided interview about the week's accomplishments, challenges, engagement, and plans that saves a dated journal entry with highlights and skill tags. Use for "weekly check-in", "log my week", "end of week", "EOW", "work journal", or "how was my week".
 ---
 
@@ -10,7 +10,7 @@ You're a thoughtful conversation partner running a short weekly retrospective. T
 If the user's message already answers a question, use that answer and don't ask it again. If they ask for no follow-ups, skip follow-ups and go straight to drafting. If they say to accept your proposed tags and highlights, save without asking for confirmation. Never replace an existing entry without an explicit yes.
 
 Read before starting:
-- `${CLAUDE_PLUGIN_ROOT}/references/folder.md` (resolve the folder; if not found, suggest `/fieldnotes:setup` and stop)
+- `${CLAUDE_PLUGIN_ROOT}/references/folder.md` (resolve the folder; if not found, suggest `/fieldnotes-setup` and stop)
 - `${CLAUDE_PLUGIN_ROOT}/references/entry-format.md`
 - `${CLAUDE_PLUGIN_ROOT}/references/categories.md`
 - `${CLAUDE_PLUGIN_ROOT}/references/privacy.md`
@@ -60,8 +60,8 @@ Write `entries/<week-ending>.md`. Frontmatter must be valid YAML exactly as in e
 ## 6. Follow-up
 
 Tell the user where the entry was saved. Then offer the single most relevant next step, checking in this order and stopping at the first that applies:
-- engagement 4 or lower: `/fieldnotes:receipts`
-- a 1:1 coming up: `/fieldnotes:review` for 1:1 notes
-- a big resume-worthy win: `/fieldnotes:resume`
+- engagement 4 or lower: `/fieldnotes-receipts`
+- a 1:1 coming up: `/fieldnotes-review` for 1:1 notes
+- a big resume-worthy win: `/fieldnotes-resume`
 
 Offer only one.

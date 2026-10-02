@@ -1,5 +1,5 @@
 ---
-name: review
+name: fieldnotes-review
 description: Prepare for a 1:1, quarterly review, annual review, or self-assessment from the user's Fieldnotes work journal, covering wins with impact, challenges and learnings, growth, and themes, with every point tied to a specific week. Use for "prep for my review", "1:1 notes", "self-review", "performance review", or "what did I do this quarter".
 argument-hint: "[1:1 | quarterly | annual | custom] [date range]"
 ---

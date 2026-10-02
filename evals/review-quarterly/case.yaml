@@ -12,7 +12,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?review"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-review"'
   - name: report-mentions-redesign
     type: regex
     target: { source: file, path: reports/2026-Q3-review.md }

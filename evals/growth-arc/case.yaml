@@ -12,7 +12,7 @@ graders:
   - name: skill-fired
     type: tool_used
     tool: Skill
-    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?growth"'
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?fieldnotes-growth"'
   - name: report-file
     type: regex
     target: { source: file, path: reports/2026-09-25-growth.md }

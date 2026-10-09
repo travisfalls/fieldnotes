@@ -39,6 +39,7 @@ Type `/fieldnotes` in the message box to see them all. In Claude Code the full f
 | `/fieldnotes-resume` | Resume bullets with impact and source weeks. |
 | `/fieldnotes-growth` | Skill trends over time, with an optional chart. |
 | `/fieldnotes-receipts` | Evidence of your good work, for rough days. |
+| `/fieldnotes-achievement` | A just-for-fun bonus: your week as snarky "New Achievement!" announcements. |
 
 ## Privacy
 
